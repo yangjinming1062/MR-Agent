@@ -1,0 +1,21 @@
+[config]
+ai_timeout = 360
+max_model_tokens = 128000 # Limits the maximum number of tokens that can be used by any model, regardless of the model's default capabilities.
+
+[log]
+dir = "logs"
+level = "DEBUG"
+info_name = "info.log"
+error_name = "error.log"
+format = "{file}|{time:YYYY-MM-DD HH:mm:ss}|{level}|{message}"
+
+[ignore]
+glob = [
+    # Ignore files and directories matching these glob patterns.
+    # See https://docs.python.org/3/library/glob.html
+    'vendor/**',
+]
+regex = [
+    # Ignore files and directories matching these regex patterns.
+    # See https://learnbyexample.github.io/python-regex-cheatsheet/
+]

@@ -1,0 +1,14 @@
+# Framework
+fastapi==0.111.0
+pydantic
+uvicorn
+# .env
+dynaconf==3.2.4
+# OTHER
+ujson==5.8.0
+loguru==0.7.2
+python-gitlab==4.2.0
+Jinja2==3.1.2
+PyYAML==6.0.1
+# AI
+tiktoken==0.7.0

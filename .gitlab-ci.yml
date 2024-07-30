@@ -1,0 +1,44 @@
+---
+variables:
+  VERSION: $(date +%y.%m)
+  PLATFORM: linux/amd64
+  IMAGE_NAME: ${REGISTRY}/ai/mr-agent
+
+before_script:
+  - docker login --username=${REGISTRY_USERNAME} --password=${REGISTRY_PASSWORD} ${REGISTRY}
+  - echo "branch ${CI_COMMIT_BRANCH}"
+  - echo "REF_NAME ${CI_COMMIT_REF_NAME}"
+
+stages:
+  - build
+#  - deploy
+
+build_latest_image:
+  stage: build
+  script:
+    - docker build --platform ${PLATFORM} -t ${IMAGE_NAME}:latest . -f Dockerfile
+    - docker push ${IMAGE_NAME}:latest
+  only:
+    variables:
+      - $CI_COMMIT_BRANCH == "main"
+
+build_release_image:
+  stage: build
+  script:
+    - docker build --platform ${PLATFORM} -t ${IMAGE_NAME}:${CI_COMMIT_MESSAGE} . -f Dockerfile
+    - docker push ${IMAGE_NAME}:${CI_COMMIT_MESSAGE}
+  only:
+    variables:
+      - $CI_COMMIT_BRANCH == "release"
+#
+#deploy_image:
+#  stage: deploy
+#  tags:
+#    - ndr-dev
+#  script:
+#    - cd /home/ndr
+#    - docker pull ${IMAGE_NAME}
+#    - docker-compose up -d
+#  only:
+#    variables:
+#      - $CI_COMMIT_BRANCH == "main"
