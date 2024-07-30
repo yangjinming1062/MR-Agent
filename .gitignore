@@ -1,0 +1,10 @@
+.idea/
+venv/
+__pycache__
+dist/
+*.egg-info/
+build/
+review.md
+/litellm_uuid.txt
+/logs/
+/settings/secret.toml

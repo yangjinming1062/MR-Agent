@@ -1,0 +1,10 @@
+services:
+  mr-agent:
+    restart: always
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./secret.toml:/app/settings/secret.toml
